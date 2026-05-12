@@ -35,6 +35,7 @@ resource "docker_container" "qbittorrent-container" {
   name     = "tf-qbittorrent"
   env      = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run = true
+  restart = "unless-stopped"
   # Connect this container to Gluetun network. Required to use VPN for downloading
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [

@@ -21,7 +21,7 @@ resource "docker_container" "portainer-container" {
     "TZ=America/Los_Angeles"
   ]
   must_run = true
-  restart  = "always"
+  restart  = "unless-stopped"
   # For some reason mounts works but volumes does not for declaring this
   # Requires research to discover why, likely related to mount options like r/ro
   mounts {

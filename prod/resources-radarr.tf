@@ -20,6 +20,7 @@ resource "docker_container" "radarr-container" {
   name       = "tf-radarr"
   env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run   = true
+  restart = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
 
   volumes {
