@@ -1,0 +1,53 @@
+###########################################
+########## Portainer Resources ##########
+###########################################
+# Creating docker image for portainer at specific version
+resource "docker_image" "portainer" {
+  name = var.portainer_image
+}
+
+# Created persistent portainer volumes
+resource "docker_volume" "portainer-data" {
+  name = "portainer_data"
+}
+
+# Creating a Docker Container for portainer
+resource "docker_container" "portainer-container" {
+  image = docker_image.portainer.image_id
+  name  = "tf-portainer"
+  env = [
+    "PUID=0",
+    "GUID=125",
+    "TZ=America/Los_Angeles"
+  ]
+  must_run = true
+  restart  = "always"
+  # For some reason mounts works but volumes does not for declaring this
+  # Requires research to discover why, likely related to mount options like r/ro
+  mounts {
+    type   = "bind"
+    target = "/var/run/docker.sock"
+    source = "/var/run/docker.sock"
+  }
+  mounts {
+    type      = "bind"
+    target    = "/etc/localtime"
+    source    = "/etc/localtime"
+    read_only = true
+  }
+  volumes {
+    volume_name    = docker_volume.portainer-data.name
+    container_path = "/data"
+  }
+
+  ports {
+    protocol = "tcp"
+    internal = 9443 # Web Gui port
+    external = 9443
+  }
+  ports {
+    protocol = "tcp"
+    internal = 8000
+    external = 8000
+  }
+}
