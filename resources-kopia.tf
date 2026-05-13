@@ -49,6 +49,27 @@ resource "docker_container" "kopia-container" {
     "--server-username=${var.kopia_user}",
     "--server-password=${var.kopia_password}"
   ]
+  labels {
+    label = "homepage.group"
+    value = "Infra Management"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Kopia"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "kopia.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:51515"
+  }
+  labels {
+    label = "homepage.description"
+    value = "Snapshot and backup manager for containers and volumes"
+  }
+
   mounts {
     type      = "bind"
     source    = "/var/lib/docker/volumes"

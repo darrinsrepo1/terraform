@@ -22,6 +22,26 @@ resource "docker_container" "radarr-container" {
   must_run   = true
   restart    = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
+  labels {
+    label = "homepage.group"
+    value = "Torrent Suite"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Radarr"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "radarr.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:7878"
+  }
+  labels {
+    label = "homepage.description"
+    value = "Movie media manager, downloader, and organizer"
+  }
 
   volumes {
     volume_name    = docker_volume.radarr_config.name

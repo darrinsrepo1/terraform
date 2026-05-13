@@ -22,6 +22,27 @@ resource "docker_container" "portainer-container" {
   ]
   must_run = true
   restart  = "unless-stopped"
+  labels {
+    label = "homepage.group"
+    value = "Infra Management"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Portainer"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "portainer.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "https://${data.external.local_data.result.ip}:9443"
+  }
+  labels {
+    label = "homepage.description"
+    value = "Manages and provides details for containers"
+  }
+
   # For some reason mounts works but volumes does not for declaring this
   # Requires research to discover why, likely related to mount options like r/ro
   mounts {

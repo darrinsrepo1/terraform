@@ -19,6 +19,26 @@ resource "docker_container" "prowlarr-container" {
   must_run   = true
   restart    = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
+  labels {
+    label = "homepage.group"
+    value = "Torrent Suite"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Prowlarr"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "prowlarr.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:9696"
+  }
+  labels {
+    label = "homepage.description"
+    value = "Torrent index manager"
+  }
 
   volumes {
     volume_name    = docker_volume.prowlarr_config.name

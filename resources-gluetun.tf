@@ -16,10 +16,25 @@ resource "docker_container" "gluetun-container" {
   name    = "tf-gluetun"
   image   = docker_image.gluetun.image_id
   restart = "unless-stopped"
-
   # Adding network capability for VPN routing
   capabilities {
     add = ["CAP_NET_ADMIN"]
+  }
+  labels {
+    label = "homepage.group"
+    value = "Network"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Gluetun VPN"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "gluetun.png"
+  }
+  labels {
+    label = "homepage.description"
+    value = "VPN Container using OpenVPN with ProtonVPN to route container traffic through VPN"
   }
 
   devices {

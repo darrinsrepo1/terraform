@@ -22,6 +22,26 @@ resource "docker_container" "sonarr-container" {
   must_run   = true
   restart    = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
+  labels {
+    label = "homepage.group"
+    value = "Torrent Suite"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Sonarr"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "sonarr.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:8989"
+  }
+  labels {
+    label = "homepage.description"
+    value = "TV Show media manager, downloader, and organizer"
+  }
 
   volumes {
     volume_name    = docker_volume.sonarr_config.name

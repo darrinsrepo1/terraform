@@ -18,10 +18,10 @@ resource "docker_container" "homepage-container" {
   must_run = true
   restart  = "unless-stopped"
   env = [
-    "PUID=1000",
-    "PGID=1000",
+    "PUID=0",
+    "PGID=0",
     "TZ=America/Los_Angeles",
-    "HOMEPAGE_ALLOWED_HOSTS=localhost"
+    "HOMEPAGE_ALLOWED_HOSTS=*"
   ]
   mounts {
     type      = "bind"

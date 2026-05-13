@@ -1,6 +1,6 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 396 (run this in ./prod: cloc *.tf)
+- Total HCL Code Lines = 423 (calculated w/ "cloc *.tf")
 - Total Containers Managed = 7
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform

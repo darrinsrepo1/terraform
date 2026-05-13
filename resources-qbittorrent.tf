@@ -42,6 +42,26 @@ resource "docker_container" "qbittorrent-container" {
     docker_container.gluetun-container,
     null_resource.qbittorrent-purge-playbook
   ]
+  labels {
+    label = "homepage.group"
+    value = "Torrent Suite"
+  }
+  labels {
+    label = "homepage.name"
+    value = "qBittorrent"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "qbittorrent.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:8080"
+  }
+  labels {
+    label = "homepage.description"
+    value = "File downloader using Gluetun VPN"
+  }
 
   volumes {
     volume_name    = docker_volume.qbittorrent_downloads.name
