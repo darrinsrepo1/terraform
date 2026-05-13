@@ -57,3 +57,8 @@ variable "kopia_password" {
   type        = string
   description = "Password for kopia"
 }
+
+variable "homepage_image" {
+  type        = string
+  description = "Docker image for Homepage container"
+}
