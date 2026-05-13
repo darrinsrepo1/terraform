@@ -20,7 +20,7 @@ resource "docker_container" "sonarr-container" {
   name       = "tf-sonarr"
   env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run   = true
-  restart = "unless-stopped"
+  restart    = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
 
   volumes {

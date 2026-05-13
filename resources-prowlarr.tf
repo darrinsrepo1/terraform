@@ -17,7 +17,7 @@ resource "docker_container" "prowlarr-container" {
   name       = "tf-prowlarr"
   env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run   = true
-  restart = "unless-stopped"
+  restart    = "unless-stopped"
   depends_on = [docker_container.qbittorrent-container]
 
   volumes {

@@ -1,6 +1,6 @@
 output "local-hostname" {
   description = "Displays local hostname that ran terraform"
-  value       = "${data.external.local_data.result.hostname}"
+  value       = data.external.local_data.result.hostname
 }
 
 output "portainer-webgui" {
