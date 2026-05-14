@@ -66,12 +66,10 @@ resource "docker_container" "portainer-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 9443 # Web Gui port
     external = 9443
   }
   ports {
-    protocol = "tcp"
     internal = 8000
     external = 8000
   }

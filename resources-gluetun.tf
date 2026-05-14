@@ -60,12 +60,10 @@ resource "docker_container" "gluetun-container" {
     external = 8888 # HTTP Proxy
   }
   ports {
-    protocol = "tcp"
     internal = 8080 # qbittorrent webgui
     external = 8080
   }
   ports {
-    protocol = "tcp"
     internal = 6881 # qbittorrent tcp traffic
     external = 6881
   }

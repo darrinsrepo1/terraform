@@ -65,7 +65,6 @@ resource "docker_container" "sonarr-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 8989 # WebGUI Port
     external = 8989
   }

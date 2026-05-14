@@ -36,7 +36,6 @@ resource "docker_container" "homepage-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 3000 # WebGUI Port
     external = 3000
   }

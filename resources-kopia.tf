@@ -105,7 +105,6 @@ resource "docker_container" "kopia-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 51515 # WebGUI Port
     external = 51515
   }

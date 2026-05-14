@@ -65,7 +65,6 @@ resource "docker_container" "radarr-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 7878 # WebGUI Port
     external = 7878
   }

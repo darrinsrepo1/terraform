@@ -50,7 +50,6 @@ resource "docker_container" "prowlarr-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 9696 # WebGUI Port
     external = 9696
   }

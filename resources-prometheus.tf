@@ -56,7 +56,6 @@ resource "docker_container" "prometheus-container" {
   }
 
   ports {
-    protocol = "tcp"
     internal = 9090 # WebGUI Port
     external = 9090
   }

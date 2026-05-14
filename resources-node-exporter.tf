@@ -63,8 +63,6 @@ resource "docker_container" "node-exporter-container" {
   }
 
   ports {
-    ip = "0.0.0.0"
-    protocol = "tcp"
     internal = 9100 # Metrics exposed port
     external = 9100
   }
