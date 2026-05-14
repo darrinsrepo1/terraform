@@ -9,9 +9,17 @@ resource "docker_image" "radarr" {
 # Created persistent radarr volumes
 resource "docker_volume" "radarr_config" {
   name = "radarr-config"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 resource "docker_volume" "radarr_movies" {
   name = "radarr-movies"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Creating a Docker Container for radarr

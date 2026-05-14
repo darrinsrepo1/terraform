@@ -62,3 +62,9 @@ variable "homepage_image" {
   type        = string
   description = "Docker image for Homepage container"
 }
+
+variable "homepage_allowed_hosts" {
+  type        = string
+  description = "Hosts allowed to access Homepage url. E.g <host-ip> OR <host-ip>:<gui-port> OR * (for allowing all)"
+  default     = "*"
+}

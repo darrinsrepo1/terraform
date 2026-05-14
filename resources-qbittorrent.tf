@@ -9,25 +9,30 @@ resource "docker_image" "qbittorrent" {
 # Created persistent qbittorrent volumes
 resource "docker_volume" "qbittorrent_downloads" {
   name = "qbittorrent-downloads"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-backup.yml"
+  lifecycle {
+    prevent_destroy = true
   }
+  #provisioner "local-exec" {
+  #  when    = destroy
+  #  command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-backup.yml"
+  #}
 }
 
 # Pre-provision configuration wipe via ansible
-resource "null_resource" "qbittorrent-purge-playbook" {
-  provisioner "local-exec" {
-    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-purge-appdata.yml"
-  }
-  depends_on = [
-  docker_volume.qbittorrent_appdata, ]
-  #    null_resource.qbittorrent-backup-playbook ]
-}
+#resource "null_resource" "qbittorrent-purge-playbook" {
+#  provisioner "local-exec" {
+#    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-purge-appdata.yml"
+#  }
+#  depends_on = [ docker_volume.qbittorrent_appdata ]
+#}
 
 # Creating a Docker Container for qbittorrent
 resource "docker_container" "qbittorrent-container" {
@@ -40,7 +45,7 @@ resource "docker_container" "qbittorrent-container" {
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [
     docker_container.gluetun-container,
-    null_resource.qbittorrent-purge-playbook
+    #null_resource.qbittorrent-purge-playbook
   ]
   labels {
     label = "homepage.group"
@@ -90,14 +95,14 @@ resource "docker_container" "qbittorrent-container" {
   #  }
 }
 
-# Post-provision configurations via ansible
-resource "null_resource" "qbittorrent-inject-config-playbook" {
-  triggers = {
-    instance_id = docker_container.qbittorrent-container.id
-  }
-  provisioner "local-exec" {
-    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-inject-config.yml"
-  }
-  depends_on = [docker_container.qbittorrent-container]
-}
+## Post-provision configurations via ansible
+#resource "null_resource" "qbittorrent-inject-config-playbook" {
+#  triggers = {
+#    instance_id = docker_container.qbittorrent-container.id
+#  }
+#  provisioner "local-exec" {
+#    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-inject-config.yml"
+#  }
+#  depends_on = [docker_container.qbittorrent-container]
+#}
 ###########################################

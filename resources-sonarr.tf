@@ -9,9 +9,17 @@ resource "docker_image" "sonarr" {
 # Created persistent sonarr volumes
 resource "docker_volume" "sonarr_config" {
   name = "sonarr-config"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 resource "docker_volume" "sonarr_shows" {
   name = "sonarr-shows"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Creating a Docker Container for sonarr

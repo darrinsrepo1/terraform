@@ -16,3 +16,7 @@ terraform {
     }
   }
 }
+
+locals {
+  environment = "prod"
+}

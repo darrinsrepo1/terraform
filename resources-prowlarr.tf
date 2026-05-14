@@ -9,6 +9,10 @@ resource "docker_image" "prowlarr" {
 # Created persistent prowlarr volumes
 resource "docker_volume" "prowlarr_config" {
   name = "prowlarr-config"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Creating a Docker Container for prowlarr

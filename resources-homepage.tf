@@ -21,7 +21,7 @@ resource "docker_container" "homepage-container" {
     "PUID=0",
     "PGID=0",
     "TZ=America/Los_Angeles",
-    "HOMEPAGE_ALLOWED_HOSTS=*"
+    "HOMEPAGE_ALLOWED_HOSTS=${var.homepage_allowed_hosts}"
   ]
   mounts {
     type      = "bind"
