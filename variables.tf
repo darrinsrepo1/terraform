@@ -33,19 +33,29 @@ variable "sonarr_image" {
   description = "Docker image for sonarr container"
 }
 
+variable "node_exporter_image" {
+  type        = string
+  description = "Docker image for Noe Export Metrics container"
+}
+
+variable "prometheus_image" {
+  type        = string
+  description = "Docker image for prometheus monitoring container"
+}
+
 variable "prowlarr_image" {
   type        = string
-  description = "Docker image for prowlarr container"
+  description = "Docker image for prowlarr indexer container"
 }
 
 variable "portainer_image" {
   type        = string
-  description = "Docker image for portainer container"
+  description = "Docker image for portainer management container"
 }
 
 variable "kopia_image" {
   type        = string
-  description = "Docker image for kopia container"
+  description = "Docker image for kopia snapshotting container"
 }
 
 variable "kopia_user" {
@@ -60,7 +70,7 @@ variable "kopia_password" {
 
 variable "homepage_image" {
   type        = string
-  description = "Docker image for Homepage container"
+  description = "Docker image for Homepage landing page container"
 }
 
 variable "homepage_allowed_hosts" {
