@@ -23,6 +23,7 @@ variable "kopia_password" {
   type        = string
   description = "Password for kopia"
   sensitive = true
+  ephemeral = true
 }
 
 variable "kopia_user" {
@@ -44,6 +45,7 @@ variable "openvpn_password" {
   type        = string
   description = "OpenVPN Proton VPN Password for gluetun"
   sensitive = true
+  ephemeral = true
 }
 
 variable "openvpn_user" {
