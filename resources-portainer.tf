@@ -10,9 +10,6 @@ resource "docker_image" "portainer" {
 resource "docker_volume" "portainer-data" {
   name = "portainer_data"
 
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 # Creating a Docker Container for portainer

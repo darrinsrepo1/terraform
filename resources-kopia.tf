@@ -20,9 +20,6 @@ resource "docker_volume" "kopia_logs" {
 resource "docker_volume" "kopia_repo" {
   name = "kopia-repo"
 
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 # Volume for browsing temporarily mounted snapshots
 resource "docker_volume" "kopia_tmp" {
