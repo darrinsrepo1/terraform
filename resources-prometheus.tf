@@ -10,6 +10,9 @@ resource "docker_image" "prometheus" {
 resource "docker_volume" "prometheus_data" {
   name = "prometheus-data"
 
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # Creating a Docker Container for prometheus

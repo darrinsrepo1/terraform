@@ -9,6 +9,10 @@ resource "docker_image" "kopia" {
 # Created persistent kopia volumes
 resource "docker_volume" "kopia_config" {
   name = "kopia-config"
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 resource "docker_volume" "kopia_cache" {
   name = "kopia-cache"
@@ -20,6 +24,9 @@ resource "docker_volume" "kopia_logs" {
 resource "docker_volume" "kopia_repo" {
   name = "kopia-repo"
 
+  lifecycle {
+    ignore_changes = all
+  }
 }
 # Volume for browsing temporarily mounted snapshots
 resource "docker_volume" "kopia_tmp" {

@@ -10,6 +10,10 @@ resource "docker_image" "radarr" {
 resource "docker_volume" "radarr_config" {
   name = "radarr-config"
 
+  lifecycle {
+    ignore_changes = all
+  }
+
 }
 resource "docker_volume" "radarr_movies" {
   name = "radarr-movies"
