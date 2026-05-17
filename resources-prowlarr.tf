@@ -10,6 +10,9 @@ resource "docker_image" "prowlarr" {
 resource "docker_volume" "prowlarr_config" {
   name = "prowlarr-config"
 
+  lifecycle {
+    ignore_changes = [ all ]
+  }
 }
 
 # Creating a Docker Container for prowlarr

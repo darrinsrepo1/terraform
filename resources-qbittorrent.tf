@@ -10,16 +10,13 @@ resource "docker_image" "qbittorrent" {
 resource "docker_volume" "qbittorrent_downloads" {
   name = "qbittorrent-downloads"
 
-  #  lifecycle {
-  #    prevent_destroy = true
-  #  }
 }
 resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
 
-  #  lifecycle {
-  #    prevent_destroy = true
-  #  }
+  lifecycle {
+    ignore_changes = [ all ]
+  }
   #provisioner "local-exec" {
   #  when    = destroy
   #  command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-backup.yml"
@@ -45,7 +42,7 @@ resource "docker_container" "qbittorrent-container" {
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [
     docker_container.gluetun-container,
-    #    null_resource.qbittorrent-purge-playbook
+#    null_resource.qbittorrent-purge-playbook
   ]
   labels {
     label = "homepage.group"
