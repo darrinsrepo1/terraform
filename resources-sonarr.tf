@@ -9,7 +9,10 @@ resource "docker_image" "sonarr" {
 # Created persistent sonarr volumes
 resource "docker_volume" "sonarr_config" {
   name = "sonarr-config"
-
+  
+  lifecycle {
+    ignore_changes = [ all ]
+  }
 }
 resource "docker_volume" "sonarr_shows" {
   name = "sonarr-shows"

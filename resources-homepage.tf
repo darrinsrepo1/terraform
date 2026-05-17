@@ -9,6 +9,10 @@ resource "docker_image" "homepage" {
 # Created persistent homepage volumes
 resource "docker_volume" "homepage_config" {
   name = "homepage-config"
+
+  lifecycle {
+    ignore_changes = [ all ]
+  }
 }
 
 # Creating a Docker Container for homepage
