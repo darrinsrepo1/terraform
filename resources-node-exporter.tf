@@ -8,11 +8,11 @@ resource "docker_image" "node-exporter" {
 
 # Creating a Docker Container for node-exporter
 resource "docker_container" "node-exporter-container" {
-  image    = docker_image.node-exporter.image_id
-  name     = "tf-node-exporter"
-  env      = [
-    "PUID=1000", 
-    "PGID=1000", 
+  image = docker_image.node-exporter.image_id
+  name  = "tf-node-exporter"
+  env = [
+    "PUID=1000",
+    "PGID=1000",
     "TZ=America/Los_Angeles"
   ]
   #network_mode = "host"
