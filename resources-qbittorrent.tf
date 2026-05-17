@@ -15,7 +15,7 @@ resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
   #provisioner "local-exec" {
   #  when    = destroy
@@ -42,7 +42,7 @@ resource "docker_container" "qbittorrent-container" {
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [
     docker_container.gluetun-container,
-#    null_resource.qbittorrent-purge-playbook
+    #    null_resource.qbittorrent-purge-playbook
   ]
   labels {
     label = "homepage.group"

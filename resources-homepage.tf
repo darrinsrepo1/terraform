@@ -11,7 +11,7 @@ resource "docker_volume" "homepage_config" {
   name = "homepage-config"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 

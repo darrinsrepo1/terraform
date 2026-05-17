@@ -11,7 +11,7 @@ resource "docker_volume" "radarr_config" {
   name = "radarr-config"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 
 }

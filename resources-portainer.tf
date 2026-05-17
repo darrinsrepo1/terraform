@@ -11,7 +11,7 @@ resource "docker_volume" "portainer-data" {
   name = "portainer_data"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 
