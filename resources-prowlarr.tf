@@ -11,7 +11,7 @@ resource "docker_volume" "prowlarr_config" {
   name = "prowlarr-config"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 

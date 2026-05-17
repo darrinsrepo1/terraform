@@ -11,7 +11,7 @@ resource "docker_volume" "kopia_config" {
   name = "kopia-config"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 resource "docker_volume" "kopia_cache" {
@@ -25,7 +25,7 @@ resource "docker_volume" "kopia_repo" {
   name = "kopia-repo"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 # Volume for browsing temporarily mounted snapshots

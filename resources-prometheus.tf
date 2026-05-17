@@ -11,7 +11,7 @@ resource "docker_volume" "prometheus_data" {
   name = "prometheus-data"
 
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes = all
   }
 }
 
