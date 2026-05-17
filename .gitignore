@@ -1,3 +1,6 @@
+# Ignore backend.tf that is specific to the environment
+backend.tf
+
 # Local .terraform directories
 .terraform/
 ./prod/.terraform/

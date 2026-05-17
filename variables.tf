@@ -22,7 +22,7 @@ variable "kopia_image" {
 variable "kopia_password" {
   type        = string
   description = "Password for kopia"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "kopia_user" {
@@ -43,7 +43,7 @@ variable "openvpn_countries" {
 variable "openvpn_password" {
   type        = string
   description = "OpenVPN Proton VPN Password for gluetun"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "openvpn_user" {
