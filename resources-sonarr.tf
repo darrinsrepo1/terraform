@@ -26,7 +26,8 @@ resource "docker_container" "sonarr-container" {
   env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run   = true
   restart    = "unless-stopped"
-  depends_on = [docker_container.qbittorrent-container]
+  # Dependancy for qbittorrent removed since downloads volume is now a simple location instead of docker volume
+  #depends_on = [docker_container.qbittorrent-container]
   labels {
     label = "homepage.group"
     value = "Torrent Suite"
@@ -56,9 +57,11 @@ resource "docker_container" "sonarr-container" {
     volume_name    = docker_volume.sonarr_shows.name
     container_path = "/tv"
   }
+  # Location of qBittorrent download folder
   volumes {
-    volume_name    = docker_volume.qbittorrent_downloads.name
+    host_path      = "/mnt/vol1/torrents"
     container_path = "/downloads"
+    read_only      = false
   }
 
   ports {
