@@ -6,30 +6,20 @@ resource "docker_image" "qbittorrent" {
   name = var.qbittorrent_image
 }
 
-# Created persistent qbittorrent volumes
-resource "docker_volume" "qbittorrent_downloads" {
-  name = "qbittorrent-downloads"
-
-}
 resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
 
   lifecycle {
     ignore_changes = all
   }
-  #provisioner "local-exec" {
-  #  when    = destroy
-  #  command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-backup.yml"
-  #}
 }
 
-# Pre-provision configuration wipe via ansible
-#resource "null_resource" "qbittorrent-purge-playbook" {
-#  provisioner "local-exec" {
-#    command = "ansible-playbook -i /ansible/inventory/inventory.ini /ansible/playbooks/qbittorrent-purge-appdata.yml"
-#  }
-#  depends_on = [ docker_volume.qbittorrent_appdata ]
-#}
+# Create folder for torrent downloads, required before qbittorrent resource since it mounts it
+resource "null_resource" "create-torrents-folder" {
+  provisioner "local-exec" {
+    command = "mkdir -p /mnt/vol1/torrents"
+  }
+}
 
 # Creating a Docker Container for qbittorrent
 resource "docker_container" "qbittorrent-container" {
@@ -42,7 +32,7 @@ resource "docker_container" "qbittorrent-container" {
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [
     docker_container.gluetun-container,
-    #    null_resource.qbittorrent-purge-playbook
+    null_resource.create-torrents-folder
   ]
   labels {
     label = "homepage.group"
@@ -66,8 +56,9 @@ resource "docker_container" "qbittorrent-container" {
   }
 
   volumes {
-    volume_name    = docker_volume.qbittorrent_downloads.name
+    host_path      = "/mnt/vol1/torrents"
     container_path = "/downloads"
+    read_only      = false
   }
   volumes {
     volume_name    = docker_volume.qbittorrent_appdata.name
