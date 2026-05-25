@@ -20,6 +20,14 @@ resource "docker_container" "gluetun-container" {
   capabilities {
     add = ["CAP_NET_ADMIN"]
   }
+  cpu_period         = null
+  cpu_quota          = null
+  cpu_set            = null
+  cpu_shares         = 0
+  cpus               = 2
+  memory             = 2072
+  memory_reservation = 512
+  memory_swap        = 0
   labels {
     label = "homepage.group"
     value = "Network"

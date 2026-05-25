@@ -24,6 +24,14 @@ resource "docker_container" "node-exporter-container" {
     "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)"
   ]
   #depends_on = [  ]
+  cpu_period         = null
+  cpu_quota          = null
+  cpu_set            = null
+  cpu_shares         = 0
+  cpus               = 2
+  memory             = 1024
+  memory_reservation = 512
+  memory_swap        = 0
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
