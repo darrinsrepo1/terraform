@@ -1,5 +1,8 @@
 # __generated__ by Terraform
-resource "docker_container" "minecraft-bedrock" {
+# Please review these resources and move them into your main configuration files.
+
+# __generated__ by Terraform from "1f89a31db0e1584cd64742710e478e8d77c8c0a4de95e1355efeb52f78ac9930"
+resource "docker_container" "plex" {
   attach                                      = null
   cgroup_parent                               = null
   cgroupns_mode                               = null
@@ -9,37 +12,39 @@ resource "docker_container" "minecraft-bedrock" {
   cpu_quota                                   = null
   cpu_set                                     = null
   cpu_shares                                  = 0
-  cpus                                        = "2.0"
+  cpus                                        = null
   destroy_grace_seconds                       = null
   dns                                         = []
   dns_opts                                    = []
   dns_search                                  = []
   domainname                                  = null
-  entrypoint                                  = ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/opt/bedrock-entry.sh"]
+  entrypoint                                  = ["/init"]
   env = [
-    "VERSION=1.26.13.1",
-    "OPS=2535421692867887",
-    "EULA=TRUE",
+    "PUID=1000",
+    "PGID=1000",
+    "TZ=America/Los_Angeles",
+    "PLEX_CLAIM=claim-a-iWvQJzkRxi5bYkcthQ",
     "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-    "SERVER_PORT=19132",
-    "SERVER_PORT_V6=19133",
-    "ENABLE_BDS_V6BIND_FIX=false"
+    "TERM=xterm",
+    "LANG=C.UTF-8",
+    "LC_ALL=C.UTF-8",
+    "CHANGE_CONFIG_DIR_OWNERSHIP=true",
+    "HOME=/config"
   ]
   gpus               = null
   group_add          = []
-  hostname           = "713a5e6bf826"
-  image              = "itzg/minecraft-bedrock-server"
+  image              = "plexinc/pms-docker:latest"
   init               = false
   ipc_mode           = "private"
   log_driver         = "json-file"
   log_opts           = {}
   logs               = null
   max_retry_count    = 0
-  memory             = 3072
-  memory_reservation = 2048
+  memory             = 0
+  memory_reservation = 0
   must_run           = null
-  name               = "tf-minecraft-bds"
-  network_mode       = "minecraft-bedrock-server_default"
+  name               = "plex"
+  network_mode       = "host"
   pid_mode           = null
   platform           = "linux"
   privileged         = false
@@ -52,36 +57,62 @@ resource "docker_container" "minecraft-bedrock" {
   security_opts      = []
   shm_size           = 64
   start              = null
-  stdin_open         = true
+  stdin_open         = false
   stop_signal        = null
   stop_timeout       = 0
   storage_opts       = {}
   sysctls            = {}
   tmpfs              = {}
-  tty                = true
+  tty                = false
   user               = null
   userns_mode        = null
   wait               = null
   wait_timeout       = null
-  working_dir        = "/data"
+  working_dir        = null
+
+  devices {
+    host_path      = "/dev/dri"
+    container_path = "/dev/dri"
+    permissions    = "rwm" # Optional: defaults to read, write, mknod
+  }
+
+  mounts {
+    type      = "bind"
+    target    = "/etc/localtime"
+    source    = "/etc/localtime"
+    read_only = true
+  }
+
+  mounts {
+    type   = "bind"
+    target = "/config"
+    source = "/docker/plex/dj-plex"
+  }
+
+  mounts {
+    type   = "bind"
+    target = "/mnt/tv"
+    source = "/mnt/vol1/media/shows"
+  }
+
+  mounts {
+    type   = "bind"
+    target = "/mnt/movies"
+    source = "/mnt/vol1/media/movies"
+  }
+
+  mounts {
+    type   = "bind"
+    target = "/mnt/music"
+    source = "/mnt/vol1/media/music"
+  }
+
   healthcheck {
-    interval       = "0s"
-    retries        = 0
+    interval       = "5s"
+    retries        = 20
     start_interval = "0s"
-    start_period   = "1m0s"
-    test           = ["CMD-SHELL", "/usr/local/bin/mc-monitor status-bedrock --host 127.0.0.1 --port $SERVER_PORT"]
-    timeout        = "0s"
-  }
-  ports {
-    external = 19132
-    internal = 19132
-    ip       = "0.0.0.0"
-    protocol = "udp"
-  }
-  ports {
-    external = 19132
-    internal = 19132
-    ip       = "::"
-    protocol = "udp"
+    start_period   = "0s"
+    test           = ["CMD-SHELL", "/healthcheck.sh || exit 1"]
+    timeout        = "2s"
   }
 }

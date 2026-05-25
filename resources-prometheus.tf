@@ -27,10 +27,9 @@ resource "docker_container" "prometheus-container" {
   cpu_quota          = null
   cpu_set            = null
   cpu_shares         = 0
-  cpus               = 2
+  cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
-  memory_swap        = 0
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"

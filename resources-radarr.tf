@@ -31,10 +31,9 @@ resource "docker_container" "radarr-container" {
   cpu_quota          = null
   cpu_set            = null
   cpu_shares         = 0
-  cpus               = 2
+  cpus               = "2.0"
   memory             = 2072
   memory_reservation = 512
-  memory_swap        = 0
   # Dependancy for qbittorrent removed since downloads volume is now a simple location instead of docker volume
   #depends_on = [docker_container.qbittorrent-container]
   labels {
