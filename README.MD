@@ -11,7 +11,7 @@
 - Fix terraform workflow for prometheus.yml getting created before prometheus resource generation
 - Graphing container
 - Logging container
-- Porting Plex container into Terraform (IN PROGRESS)
+- Porting Plex container into Terraform (IN PROGRESS - Needs PR Merge and testing on prod)
 - Configuring Jellyfin offline backup container
 - Remove Ansible backups logic in favor of Kopia snapshots
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
@@ -68,6 +68,7 @@ moved {    # Place in main.tf
 - Run "terraform plan" to validate the move
 - Run "terraform apply" to apply the resource move in the state file
 - Delete the moved block or archive it commented out in moved.tf
+- Test imported block on
 
 ## Removing Resources
 When removing resources from terraform state to manage outside terraform, use this to prevent it from being destroyed:
@@ -92,6 +93,9 @@ import {    # Place in main.tf
     to = {provider.resource_name}    # Resource that will manage going forward
     id = "Value to manage"    # The new secret, repo, or subscription
 }
+
+Use this to generate config from import block:
+terraform plan -generate-config-out=<desired-resource-name>.tf
 
 - Create the new resource in your terraform config
 - Create the import block in main.tf
