@@ -27,6 +27,15 @@ resource "docker_container" "homepage-container" {
     "TZ=America/Los_Angeles",
     "HOMEPAGE_ALLOWED_HOSTS=${var.homepage_allowed_hosts}"
   ]
+  cpu_period                                  = null
+  cpu_quota                                   = null
+  cpu_set                                     = null
+  cpu_shares                                  = 0
+  cpus                                        = 2
+  memory                                      = "1024M"
+  memory_reservation                          = "512M"
+  memory_swap                                 = 0
+
   mounts {
     type      = "bind"
     target    = "/var/run/docker.sock"

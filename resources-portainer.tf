@@ -26,6 +26,14 @@ resource "docker_container" "portainer-container" {
   ]
   must_run = true
   restart  = "unless-stopped"
+  cpu_period                                  = null
+  cpu_quota                                   = null
+  cpu_set                                     = null
+  cpu_shares                                  = 0
+  cpus                                        = 2
+  memory                                      = "2072M"
+  memory_reservation                          = "512M"
+  memory_swap                                 = 0
   labels {
     label = "homepage.group"
     value = "Infra Management"

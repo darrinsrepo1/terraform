@@ -21,11 +21,19 @@ resource "docker_volume" "sonarr_shows" {
 
 # Creating a Docker Container for sonarr
 resource "docker_container" "sonarr-container" {
-  image      = docker_image.sonarr.image_id
-  name       = "tf-sonarr"
-  env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
-  must_run   = true
-  restart    = "unless-stopped"
+  image    = docker_image.sonarr.image_id
+  name     = "tf-sonarr"
+  env      = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
+  must_run = true
+  restart  = "unless-stopped"
+  cpu_period                                  = null
+  cpu_quota                                   = null
+  cpu_set                                     = null
+  cpu_shares                                  = 0
+  cpus                                        = 2
+  memory                                      = "2072M"
+  memory_reservation                          = "512M"
+  memory_swap                                 = 0
   # Dependancy for qbittorrent removed since downloads volume is now a simple location instead of docker volume
   #depends_on = [docker_container.qbittorrent-container]
   labels {
