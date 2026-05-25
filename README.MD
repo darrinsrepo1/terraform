@@ -1,21 +1,18 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 846    # cloc /terraform/*.tf
-- Total Comment Lines = 120
-- Total Resources = 38          # terraform state list | wc -l : HCP Free Tier Requires < 500
-- Total Containers Managed = 11
+- Total HCL Code Lines = 950    # cloc /terraform/*.tf
+- Total Comment Lines = 127
+- Total Resources = 39          # terraform state list | wc -l : HCP Free Tier Requires < 500
+- Total Containers Managed = 12
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
 ## TODO
 - Fix terraform workflow for prometheus.yml getting created before prometheus resource generation
-- Monitoring container
 - Graphing container
 - Logging container
-- Porting Plex container into Terraform
+- Porting Plex container into Terraform (IN PROGRESS)
 - Configuring Jellyfin offline backup container
-- Porting kids's Minecraft server into Terraform
-- Migrating Terraform into dedicated server(move from laptop)
 - Remove Ansible backups logic in favor of Kopia snapshots
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
 - Revamp container image version management via Terraform
