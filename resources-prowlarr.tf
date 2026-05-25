@@ -17,12 +17,20 @@ resource "docker_volume" "prowlarr_config" {
 
 # Creating a Docker Container for prowlarr
 resource "docker_container" "prowlarr-container" {
-  image      = docker_image.prowlarr.image_id
-  name       = "tf-prowlarr"
-  env        = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
-  must_run   = true
-  restart    = "unless-stopped"
-  depends_on = [docker_container.qbittorrent-container]
+  image              = docker_image.prowlarr.image_id
+  name               = "tf-prowlarr"
+  env                = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
+  must_run           = true
+  restart            = "unless-stopped"
+  depends_on         = [docker_container.qbittorrent-container]
+  cpu_period         = null
+  cpu_quota          = null
+  cpu_set            = null
+  cpu_shares         = 0
+  cpus               = 2
+  memory             = 2072
+  memory_reservation = 512
+  memory_swap        = 0
   labels {
     label = "homepage.group"
     value = "Torrent Suite"

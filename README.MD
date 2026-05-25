@@ -1,9 +1,9 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 682    # cloc ./terraform/*.tf
-- Total Comment Lines = 118
-- Total Resources = 37          # terraform state list | wc -l : HCP Free Tier Requires < 500
-- Total Containers Managed = 10
+- Total HCL Code Lines = 846    # cloc /terraform/*.tf
+- Total Comment Lines = 120
+- Total Resources = 38          # terraform state list | wc -l : HCP Free Tier Requires < 500
+- Total Containers Managed = 11
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
