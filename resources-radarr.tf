@@ -22,19 +22,19 @@ resource "docker_volume" "radarr_movies" {
 
 # Creating a Docker Container for radarr
 resource "docker_container" "radarr-container" {
-  image    = docker_image.radarr.image_id
-  name     = "tf-radarr"
-  env      = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
-  must_run = true
-  restart  = "unless-stopped"
-  cpu_period                                  = null
-  cpu_quota                                   = null
-  cpu_set                                     = null
-  cpu_shares                                  = 0
-  cpus                                        = 2
-  memory                                      = "2072M"
-  memory_reservation                          = "512M"
-  memory_swap                                 = 0
+  image              = docker_image.radarr.image_id
+  name               = "tf-radarr"
+  env                = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
+  must_run           = true
+  restart            = "unless-stopped"
+  cpu_period         = null
+  cpu_quota          = null
+  cpu_set            = null
+  cpu_shares         = 0
+  cpus               = 2
+  memory             = 2072
+  memory_reservation = 512
+  memory_swap        = 0
   # Dependancy for qbittorrent removed since downloads volume is now a simple location instead of docker volume
   #depends_on = [docker_container.qbittorrent-container]
   labels {

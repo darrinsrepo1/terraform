@@ -24,16 +24,16 @@ resource "docker_container" "portainer-container" {
     "GUID=125",
     "TZ=America/Los_Angeles"
   ]
-  must_run = true
-  restart  = "unless-stopped"
-  cpu_period                                  = null
-  cpu_quota                                   = null
-  cpu_set                                     = null
-  cpu_shares                                  = 0
-  cpus                                        = 2
-  memory                                      = "2072M"
-  memory_reservation                          = "512M"
-  memory_swap                                 = 0
+  must_run           = true
+  restart            = "unless-stopped"
+  cpu_period         = null
+  cpu_quota          = null
+  cpu_set            = null
+  cpu_shares         = 0
+  cpus               = 2
+  memory             = 2072
+  memory_reservation = 512
+  memory_swap        = 0
   labels {
     label = "homepage.group"
     value = "Infra Management"
