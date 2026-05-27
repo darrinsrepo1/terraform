@@ -1,22 +1,19 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 846    # cloc /terraform/*.tf
-- Total Comment Lines = 120
-- Total Resources = 38          # terraform state list | wc -l : HCP Free Tier Requires < 500
-- Total Containers Managed = 11
+- Total HCL Code Lines = 959    # cloc /terraform/*.tf
+- Total Comment Lines = 130
+- Total Resources = 39          # terraform state list | wc -l : HCP Free Tier Requires < 500
+- Total Containers Managed = 12
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
 ## TODO
 - Fix terraform workflow for prometheus.yml getting created before prometheus resource generation
-- Monitoring container
 - Graphing container
 - Logging container
-- Porting Plex container into Terraform
+- Porting Plex container into Terraform (IN PROGRESS - Needs PR Merge and testing on prod)
 - Configuring Jellyfin offline backup container
-- Porting kids's Minecraft server into Terraform
-- Migrating Terraform into dedicated server(move from laptop)
-- Remove Ansible backups logic in favor of Kopia snapshots
+- Activate playbook to apply qbittorrent backup(kopia snapshot fails, needs work)
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
 - Revamp container image version management via Terraform
   
@@ -71,6 +68,7 @@ moved {    # Place in main.tf
 - Run "terraform plan" to validate the move
 - Run "terraform apply" to apply the resource move in the state file
 - Delete the moved block or archive it commented out in moved.tf
+- Test imported block on
 
 ## Removing Resources
 When removing resources from terraform state to manage outside terraform, use this to prevent it from being destroyed:
@@ -95,6 +93,9 @@ import {    # Place in main.tf
     to = {provider.resource_name}    # Resource that will manage going forward
     id = "Value to manage"    # The new secret, repo, or subscription
 }
+
+Use this to generate config from import block:
+terraform plan -generate-config-out=<desired-resource-name>.tf
 
 - Create the new resource in your terraform config
 - Create the import block in main.tf

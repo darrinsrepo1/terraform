@@ -9,9 +9,9 @@ resource "docker_image" "qbittorrent" {
 resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
 
-  lifecycle {
-    ignore_changes = all
-  }
+  #  lifecycle {
+  #    ignore_changes = all
+  #  }
 }
 
 # Create folder for torrent downloads, required before qbittorrent resource since it mounts it
@@ -32,10 +32,10 @@ resource "docker_container" "qbittorrent-container" {
   cpu_quota          = null
   cpu_set            = null
   cpu_shares         = 0
-  cpus               = 3
+  cpus               = "3.0"
   memory             = 4096
   memory_reservation = 512
-  memory_swap        = 0
+  memory_swap        = 4096
   # Connect this container to Gluetun network. Required to use VPN for downloading
   network_mode = "container:${docker_container.gluetun-container.id}"
   depends_on = [

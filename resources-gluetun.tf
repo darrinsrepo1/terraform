@@ -24,10 +24,10 @@ resource "docker_container" "gluetun-container" {
   cpu_quota          = null
   cpu_set            = null
   cpu_shares         = 0
-  cpus               = 2
+  cpus               = "2.0"
   memory             = 2072
   memory_reservation = 512
-  memory_swap        = 0
+  memory_swap        = 2072
   labels {
     label = "homepage.group"
     value = "Network"

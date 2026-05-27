@@ -42,8 +42,8 @@ resource "docker_container" "kopia-container" {
   must_run = true
   restart  = "unless-stopped"
   env = [
-    "PUID=1000",
-    "PGID=1000",
+    "PUID=0",
+    "PGID=0",
     "TZ=America/Los_Angeles",
     "USER=${var.kopia_user}",
     "KOPIA_PASSWORD=${var.kopia_password}"
@@ -61,10 +61,10 @@ resource "docker_container" "kopia-container" {
   cpu_quota          = null
   cpu_set            = null
   cpu_shares         = 0
-  cpus               = 2
+  cpus               = "2.0"
   memory             = 2072
   memory_reservation = 512
-  memory_swap        = 0
+  memory_swap        = 2072
   labels {
     label = "homepage.group"
     value = "Infra Management"
