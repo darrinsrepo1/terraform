@@ -34,6 +34,27 @@ resource "docker_container" "plex" {
   restart            = "unless-stopped"
   shm_size           = 64
 
+  labels {
+    label = "homepage.group"
+    value = "Media"
+  }
+  labels {
+    label = "homepage.name"
+    value = "Plex"
+  }
+  labels {
+    label = "homepage.icon"
+    value = "plex.png"
+  }
+  labels {
+    label = "homepage.href"
+    value = "http://${data.external.local_data.result.ip}:32400/web"
+  }
+  labels {
+    label = "homepage.description"
+    value = "Home media streaming service"
+  }
+
   devices {
     host_path      = "/dev/dri"
     container_path = "/dev/dri"
