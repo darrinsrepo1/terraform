@@ -9,7 +9,7 @@ resource "docker_container" "minecraft-bedrock" {
   cpu_quota                                   = null
   cpu_set                                     = null
   cpu_shares                                  = 0
-  cpus                                        = 2
+  cpus                                        = "2.0"
   destroy_grace_seconds                       = null
   dns                                         = []
   dns_opts                                    = []
@@ -37,7 +37,7 @@ resource "docker_container" "minecraft-bedrock" {
   max_retry_count    = 0
   memory             = 3072
   memory_reservation = 2048
-  memory_swap        = 0
+  memory_swap        = 3072
   must_run           = null
   name               = "tf-minecraft-bds"
   network_mode       = "minecraft-bedrock-server_default"
