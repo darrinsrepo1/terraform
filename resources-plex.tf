@@ -3,22 +3,11 @@
 
 # __generated__ by Terraform from "1f89a31db0e1584cd64742710e478e8d77c8c0a4de95e1355efeb52f78ac9930"
 resource "docker_container" "plex" {
-  attach                                      = null
-  cgroup_parent                               = null
-  cgroupns_mode                               = null
-  command                                     = []
-  container_read_refresh_timeout_milliseconds = null
-  cpu_period                                  = null
-  cpu_quota                                   = null
-  cpu_set                                     = null
-  cpu_shares                                  = 0
-  cpus                                        = null
-  destroy_grace_seconds                       = null
-  dns                                         = []
-  dns_opts                                    = []
-  dns_search                                  = []
-  domainname                                  = null
-  entrypoint                                  = ["/init"]
+  cpu_period = null
+  cpu_quota  = null
+  cpu_set    = null
+  cpu_shares = 0
+  cpus       = null
   env = [
     "PUID=1000",
     "PGID=1000",
@@ -31,44 +20,15 @@ resource "docker_container" "plex" {
     "CHANGE_CONFIG_DIR_OWNERSHIP=true",
     "HOME=/config"
   ]
-  gpus               = null
-  group_add          = []
   image              = "plexinc/pms-docker:latest"
-  init               = false
-  ipc_mode           = "private"
-  log_driver         = "json-file"
-  log_opts           = {}
-  logs               = null
-  max_retry_count    = 0
   memory             = 0
   memory_reservation = 0
-  must_run           = null
-  name               = "plex"
+  memory_swap        = 0
+  must_run           = true
+  name               = "tf-plex"
   network_mode       = "host"
-  pid_mode           = null
-  platform           = "linux"
-  privileged         = false
-  publish_all_ports  = false
-  read_only          = false
-  remove_volumes     = null
   restart            = "unless-stopped"
-  rm                 = false
-  runtime            = "runc"
-  security_opts      = []
   shm_size           = 64
-  start              = null
-  stdin_open         = false
-  stop_signal        = null
-  stop_timeout       = 0
-  storage_opts       = {}
-  sysctls            = {}
-  tmpfs              = {}
-  tty                = false
-  user               = null
-  userns_mode        = null
-  wait               = null
-  wait_timeout       = null
-  working_dir        = null
 
   devices {
     host_path      = "/dev/dri"

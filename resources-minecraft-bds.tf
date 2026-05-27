@@ -37,6 +37,7 @@ resource "docker_container" "minecraft-bedrock" {
   max_retry_count    = 0
   memory             = 3072
   memory_reservation = 2048
+  memory_swap        = 3072
   must_run           = null
   name               = "tf-minecraft-bds"
   network_mode       = "minecraft-bedrock-server_default"

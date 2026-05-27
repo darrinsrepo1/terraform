@@ -34,6 +34,7 @@ resource "docker_container" "homepage-container" {
   cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
+  memory_swap        = 1024
 
   mounts {
     type      = "bind"

@@ -7,7 +7,7 @@ output "webgui-urls" {
   description = "WebGUI ports for terraform container resources"
   value       = <<-EOT
     Homepage:      http://${data.external.local_data.result.ip}:3000
-    Portainer:     http://${data.external.local_data.result.ip}:9443
+    Portainer:     https://${data.external.local_data.result.ip}:9443
     Kopia:         http://${data.external.local_data.result.ip}:51515
     qBittorrent:   http://${data.external.local_data.result.ip}:8080
     Prowlarr:      http://${data.external.local_data.result.ip}:9696

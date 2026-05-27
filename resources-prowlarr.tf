@@ -30,6 +30,7 @@ resource "docker_container" "prowlarr-container" {
   cpus               = "2.0"
   memory             = 2072
   memory_reservation = 512
+  memory_swap        = 2072
   labels {
     label = "homepage.group"
     value = "Torrent Suite"
