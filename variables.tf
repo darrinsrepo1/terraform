@@ -1,6 +1,16 @@
+variable "cadvisor_image" {
+  type        = string
+  description = "Docker image for cadvisor container"
+}
+
 variable "gluetun_image" {
   type        = string
   description = "Docker image for qbittorrent container"
+}
+
+variable "grafana_image" {
+  type        = string
+  description = "Docker image for Grafana container"
 }
 
 variable "homepage_allowed_hosts" {
