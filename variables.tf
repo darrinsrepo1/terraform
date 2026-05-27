@@ -24,6 +24,11 @@ variable "homepage_image" {
   description = "Docker image for Homepage landing page container"
 }
 
+variable "jellyfin_image" {
+  type        = string
+  description = "Docker image for Jellyfin media container"
+}
+
 variable "kopia_image" {
   type        = string
   description = "Docker image for kopia snapshotting container"

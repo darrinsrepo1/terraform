@@ -8,6 +8,7 @@ output "webgui-urls" {
   value       = <<-EOT
     cAdvisor:      http://${data.external.local_data.result.ip}:8081
     Grafana:       http://${data.external.local_data.result.ip}:3001
+    Jellyfin:      http://${data.external.local_data.result.ip}:8096
     Homepage:      http://${data.external.local_data.result.ip}:3000
     Plex:          http://${data.external.local_data.result.ip}:32400/web
     Portainer:     https://${data.external.local_data.result.ip}:9443
