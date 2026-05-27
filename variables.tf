@@ -51,6 +51,17 @@ variable "openvpn_user" {
   description = "OpenVPN Proton VPN User name for gluetun"
 }
 
+variable "plex_claim" {
+  type        = string
+  description = "Plex claim token"
+  sensitive   = true
+}
+
+variable "plex_image" {
+  type        = string
+  description = "Docker image for plex container"
+}
+
 variable "portainer_image" {
   type        = string
   description = "Docker image for portainer management container"

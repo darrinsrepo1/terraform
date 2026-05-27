@@ -1,6 +1,10 @@
 # __generated__ by Terraform
 # Please review these resources and move them into your main configuration files.
 
+resource "docker_image" "plex" {
+  name = var.plex_image
+}
+
 # __generated__ by Terraform from "1f89a31db0e1584cd64742710e478e8d77c8c0a4de95e1355efeb52f78ac9930"
 resource "docker_container" "plex" {
   cpu_period = null
@@ -12,7 +16,7 @@ resource "docker_container" "plex" {
     "PUID=1000",
     "PGID=1000",
     "TZ=America/Los_Angeles",
-    "PLEX_CLAIM=claim-a-iWvQJzkRxi5bYkcthQ",
+    "PLEX_CLAIM=${var.plex_claim}",
     "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
     "TERM=xterm",
     "LANG=C.UTF-8",
@@ -20,7 +24,7 @@ resource "docker_container" "plex" {
     "CHANGE_CONFIG_DIR_OWNERSHIP=true",
     "HOME=/config"
   ]
-  image              = "plexinc/pms-docker:latest"
+  image              = docker_image.plex.image_id
   memory             = 0
   memory_reservation = 0
   memory_swap        = 0
