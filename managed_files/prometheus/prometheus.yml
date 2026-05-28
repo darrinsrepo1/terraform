@@ -1,0 +1,29 @@
+# Global configuration settings
+global:
+  scrape_interval: 15s     # How often to scrape targets (default 1m)
+  evaluation_interval: 15s # How often to evaluate rules (default 1m)
+  # scrape_timeout is set to the global default (10s)
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing endpoints to monitor
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Example of adding a second target (e.g., Node Exporter)
+  - job_name: "node_exporter"
+    static_configs:
+      - targets: ["172.17.0.1:9100"]
