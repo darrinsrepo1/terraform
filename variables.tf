@@ -3,6 +3,11 @@ variable "cadvisor_image" {
   description = "Docker image for cadvisor container"
 }
 
+variable "dozzle_image" {
+  type        = string
+  description = "Docker image for Dozzle container"
+}
+
 variable "gluetun_image" {
   type        = string
   description = "Docker image for qbittorrent container"

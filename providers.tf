@@ -3,3 +3,5 @@ provider "docker" {
 }
 
 provider "null" {}
+
+provider "local" {}
