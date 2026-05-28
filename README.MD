@@ -1,15 +1,13 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 1166    # cloc /terraform/*.tf
-- Total Comment Lines = 141
-- Total Resources = 47          # terraform state list | wc -l : HCP Free Tier Requires < 500
+- Total HCL Code Lines = 1235    # cloc /terraform/*.tf
+- Total Comment Lines = 148
+- Total Resources = 51          # terraform state list | wc -l : HCP Free Tier Requires < 500
 - Total Containers Managed = 15
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
 ## TODO
-- Fix terraform workflow for prometheus.yml getting created before prometheus resource generation
-- Logging container
 - Activate playbook to apply qbittorrent backup(kopia snapshot fails, needs work)
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
 - Revamp container image version management via Terraform
@@ -100,17 +98,39 @@ terraform plan -generate-config-out=<desired-resource-name>.tf
 - Run "terraform apply" to apply the change
 - Delete the import block or archive it commented out in import.tf
 
+
+# Running Containers
+## cAdvisor
+- Provides container metrics for prometheus/grafana
+## Dozzle
+- Provides strong look into container logs
 ## Gluetun (ProtonVPN via OpenVPN)
 - Established VPN network for other containers
 - Containers using this VPN network must have ports defined inside gluetun
 - Currently used by:  
 qBittorrent  
-
+## Grafana
+- Provides graphical dashboards of collected metrics
+## Homepage
+- Main page for my home network
+## Jellyfin
+- Alternate Media streaming software to Plex
 ## Kopia
 - Backup Manager for containers
 - Snapshots managed:  
 qbittorrent-appdata  
-
+## Minecraft Bedrock Server
+- Kids minecraft server
+- Needs solution for keeping tied to Nintendo Switch version
+## Node Exporter
+- Provides metrics for Prometheus / Grafana
+## Plex
+- Main media streaming service with a similar purpose to Jellyfin
+## Portainer
+- Container administrator WebGUI to simplify container tasks outside te CLI
+## Prometheus
+- Metrics scraper and aggregator that's a crucial step in the monitoring chain
+## Prowlarr
 ## qBittorrent
 - qBittorrent container used gluetun container for network
 - When porting to dedicated server, qbittorrent needs downloads folder adjusted  
@@ -121,3 +141,6 @@ To load a custom qBittorrent.conf:
 - Copy new qBittorrent.conf to /config/qBittorrent/
 docker cp /local/path/qBittorrent.conf <container_id>:/config/qBittorrent/
 - Start the container  
+## Radaar
+
+## Sonarr

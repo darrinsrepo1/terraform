@@ -20,14 +20,21 @@ resource "docker_volume" "prometheus_data" {
   }
 }
 
+# Create Prometheus.yml prior to creating Prometheus container
+resource "local_file" "prometheus_yml" {
+  content         = file("/terraform/managed_files/prometheus/prometheus.yml")
+  filename        = "/etc/prometheus/prometheus.yml"
+  file_permission = "0644"
+}
+
 # Creating a Docker Container for prometheus
 resource "docker_container" "prometheus-container" {
-  image    = docker_image.prometheus.image_id
-  name     = "tf-prometheus"
-  env      = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
-  must_run = true
-  restart  = "unless-stopped"
-  #depends_on = [  ]
+  image              = docker_image.prometheus.image_id
+  name               = "tf-prometheus"
+  env                = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
+  must_run           = true
+  restart            = "unless-stopped"
+  depends_on         = [local_file.prometheus_yml]
   cpu_period         = null
   cpu_quota          = null
   cpu_set            = null
