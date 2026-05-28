@@ -1,6 +1,16 @@
+variable "cadvisor_image" {
+  type        = string
+  description = "Docker image for cadvisor container"
+}
+
 variable "gluetun_image" {
   type        = string
   description = "Docker image for qbittorrent container"
+}
+
+variable "grafana_image" {
+  type        = string
+  description = "Docker image for Grafana container"
 }
 
 variable "homepage_allowed_hosts" {
@@ -12,6 +22,11 @@ variable "homepage_allowed_hosts" {
 variable "homepage_image" {
   type        = string
   description = "Docker image for Homepage landing page container"
+}
+
+variable "jellyfin_image" {
+  type        = string
+  description = "Docker image for Jellyfin media container"
 }
 
 variable "kopia_image" {

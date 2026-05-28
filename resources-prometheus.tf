@@ -6,6 +6,11 @@ resource "docker_image" "prometheus" {
   name = var.prometheus_image
 }
 
+# Create a Docker network for internal communication
+resource "docker_network" "monitoring" {
+  name = "monitoring"
+}
+
 # Created persistent prometheus volumes
 resource "docker_volume" "prometheus_data" {
   name = "prometheus-data"
@@ -31,6 +36,11 @@ resource "docker_container" "prometheus-container" {
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
+
+  networks_advanced {
+    name = docker_network.monitoring.name
+  }
+
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
