@@ -36,9 +36,9 @@ resource "docker_container" "plex" {
   memory_swap        = 0
   must_run           = true
   name               = "tf-plex"
-#  network_mode       = "host"
-  restart            = "unless-stopped"
-  shm_size           = 64
+  #  network_mode       = "host"
+  restart  = "unless-stopped"
+  shm_size = 64
 
   labels {
     label = "homepage.group"

@@ -9,14 +9,14 @@ variable "dozzle_image" {
 }
 
 variable "frigate_image" {
-  type = string
+  type        = string
   description = "Docker image for Frigate NVR container"
 }
 
 variable "frigate_rstp_password" {
-  type = string
+  type        = string
   description = "Password for rstp streams"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "gluetun_image" {
