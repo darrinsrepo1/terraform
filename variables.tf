@@ -8,6 +8,17 @@ variable "dozzle_image" {
   description = "Docker image for Dozzle container"
 }
 
+variable "frigate_image" {
+  type        = string
+  description = "Docker image for Frigate NVR container"
+}
+
+variable "frigate_rstp_password" {
+  type        = string
+  description = "Password for rstp streams"
+  sensitive   = true
+}
+
 variable "gluetun_image" {
   type        = string
   description = "Docker image for qbittorrent container"
