@@ -1,6 +1,3 @@
-###########################################
-########## Sonarr Resources ##########
-###########################################
 # Creating docker image for sonarr at specific version
 resource "docker_image" "sonarr" {
   name = var.sonarr_image
@@ -9,10 +6,6 @@ resource "docker_image" "sonarr" {
 # Created persistent sonarr volumes
 resource "docker_volume" "sonarr_config" {
   name = "sonarr-config"
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 resource "docker_volume" "sonarr_shows" {
   name = "sonarr-shows"

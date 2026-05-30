@@ -1,6 +1,3 @@
-###########################################
-########## Radarr Resources ##########
-###########################################
 # Creating docker image for radarr at specific version
 resource "docker_image" "radarr" {
   name = var.radarr_image
@@ -9,11 +6,6 @@ resource "docker_image" "radarr" {
 # Created persistent radarr volumes
 resource "docker_volume" "radarr_config" {
   name = "radarr-config"
-
-  lifecycle {
-    ignore_changes = all
-  }
-
 }
 resource "docker_volume" "radarr_movies" {
   name = "radarr-movies"
@@ -78,4 +70,3 @@ resource "docker_container" "radarr-container" {
     external = 7878
   }
 }
-###########################################

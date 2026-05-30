@@ -1,6 +1,3 @@
-###########################################
-######### Node Exporter Resources #########
-###########################################
 # Creating docker image for node-exporter at specific version
 resource "docker_image" "node-exporter" {
   name = var.node_exporter_image

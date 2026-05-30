@@ -1,6 +1,3 @@
-###########################################
-########## Prowlarr Resources ##########
-###########################################
 # Creating docker image for sonarr at specific version
 resource "docker_image" "prowlarr" {
   name = var.prowlarr_image
@@ -9,10 +6,6 @@ resource "docker_image" "prowlarr" {
 # Created persistent prowlarr volumes
 resource "docker_volume" "prowlarr_config" {
   name = "prowlarr-config"
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 # Creating a Docker Container for prowlarr
@@ -62,5 +55,3 @@ resource "docker_container" "prowlarr-container" {
     external = 9696
   }
 }
-
-###########################################
