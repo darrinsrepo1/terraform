@@ -1,6 +1,3 @@
-###########################################
-##########   Gluetun Resources   ##########
-###########################################
 # Defining docker image for gluetun
 resource "docker_image" "gluetun" {
   name = var.gluetun_image

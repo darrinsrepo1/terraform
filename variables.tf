@@ -61,9 +61,14 @@ variable "kopia_user" {
   description = "User for kopia"
 }
 
+variable "minecraft-bds_image" {
+  type = string
+  description = "Docker image for Minecraft Bedrock Server container"
+}
+
 variable "node_exporter_image" {
   type        = string
-  description = "Docker image for Noe Export Metrics container"
+  description = "Docker image for Node Export Metrics container"
 }
 
 variable "openvpn_countries" {

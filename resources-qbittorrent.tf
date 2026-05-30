@@ -1,6 +1,3 @@
-###########################################
-########## Qbittorrent Resources ##########
-###########################################
 # Creating docker image for qbittorrent at specific version
 resource "docker_image" "qbittorrent" {
   name = var.qbittorrent_image
@@ -8,10 +5,6 @@ resource "docker_image" "qbittorrent" {
 
 resource "docker_volume" "qbittorrent_appdata" {
   name = "qbittorrent-appdata"
-
-  #  lifecycle {
-  #    ignore_changes = all
-  #  }
 }
 
 # Create folder for torrent downloads, required before qbittorrent resource since it mounts it
@@ -101,4 +94,3 @@ resource "docker_container" "qbittorrent-container" {
 #  }
 #  depends_on = [docker_container.qbittorrent-container]
 #}
-###########################################

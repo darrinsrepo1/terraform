@@ -1,6 +1,3 @@
-###########################################
-########### Homepage Resources ############
-###########################################
 # Creating docker image for homepage at specific version
 resource "docker_image" "homepage" {
   name = var.homepage_image
@@ -12,6 +9,26 @@ resource "docker_volume" "homepage_config" {
 
   lifecycle {
     ignore_changes = all
+  }
+}
+
+# Create docker.yaml prior to creating homepage container
+resource "local_file" "homepage_docker_yaml" {
+  content         = file("/terraform/managed_files/homepage/docker.yaml")
+  filename        = "/var/lib/docker/volumes/homepage-config/_data/docker.yaml"
+  file_permission = "0644"
+  depends_on = [ docker_volume.homepage_config ]
+}
+
+# Sets ownership of the local file
+resource "null_resource" "homepage_docker_yaml_ownership" {
+  # The provisioner triggers only after the file resource is created
+  triggers = {
+    file_id = local_file.homepage_docker_yaml.id
+  }
+
+  provisioner "local-exec" {
+    command = "sudo chown darrin:darrin ${local_file.homepage_docker_yaml.filename}"
   }
 }
 
@@ -35,6 +52,8 @@ resource "docker_container" "homepage-container" {
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
+
+  depends_on = [ null_resource.homepage_docker_yaml_ownership ]
 
   mounts {
     type      = "bind"

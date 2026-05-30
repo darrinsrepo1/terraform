@@ -1,6 +1,3 @@
-###########################################
-########## Kopia Resources ##########
-###########################################
 # Creating docker image for kopia at specific version
 resource "docker_image" "kopia" {
   name = var.kopia_image
@@ -9,10 +6,6 @@ resource "docker_image" "kopia" {
 # Created persistent kopia volumes
 resource "docker_volume" "kopia_config" {
   name = "kopia-config"
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 resource "docker_volume" "kopia_cache" {
   name = "kopia-cache"

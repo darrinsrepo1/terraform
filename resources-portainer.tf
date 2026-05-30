@@ -1,6 +1,3 @@
-###########################################
-########## Portainer Resources ##########
-###########################################
 # Creating docker image for portainer at specific version
 resource "docker_image" "portainer" {
   name = var.portainer_image
@@ -9,10 +6,6 @@ resource "docker_image" "portainer" {
 # Created persistent portainer volumes
 resource "docker_volume" "portainer-data" {
   name = "portainer_data"
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 # Creating a Docker Container for portainer
