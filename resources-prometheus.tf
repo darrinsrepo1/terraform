@@ -1,6 +1,3 @@
-###########################################
-########## Prometheus Resources ##########
-###########################################
 # Creating docker image for prometheus at specific version
 resource "docker_image" "prometheus" {
   name = var.prometheus_image
@@ -15,9 +12,6 @@ resource "docker_network" "monitoring" {
 resource "docker_volume" "prometheus_data" {
   name = "prometheus-data"
 
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 # Create Prometheus.yml prior to creating Prometheus container
@@ -25,6 +19,18 @@ resource "local_file" "prometheus_yml" {
   content         = file("/terraform/managed_files/prometheus/prometheus.yml")
   filename        = "/etc/prometheus/prometheus.yml"
   file_permission = "0644"
+}
+
+# Sets ownership of the local file
+resource "null_resource" "prometheus_yml_ownership" {
+  # The provisioner triggers only after the file resource is created
+  triggers = {
+    file_id = local_file.prometheus_yml.id
+  }
+
+  provisioner "local-exec" {
+    command = "sudo chown 0:0 ${local_file.prometheus_yml.filename}"
+  }
 }
 
 # Creating a Docker Container for prometheus

@@ -1,21 +1,17 @@
-# __generated__ by Terraform
+# __generated__ by Terraform then modified to needs
+# Define image for minecraft server so it can be controllerd with others via tfvars
+resource "docker_image" "minecraft" {
+  name = var.minecraft-bds_image
+  }
+
+# Define Minecraft server container resource to provision
 resource "docker_container" "minecraft-bedrock" {
-  attach                                      = null
-  cgroup_parent                               = null
-  cgroupns_mode                               = null
-  command                                     = []
-  container_read_refresh_timeout_milliseconds = null
-  cpu_period                                  = null
-  cpu_quota                                   = null
-  cpu_set                                     = null
-  cpu_shares                                  = 0
-  cpus                                        = "2.0"
-  destroy_grace_seconds                       = null
-  dns                                         = []
-  dns_opts                                    = []
-  dns_search                                  = []
-  domainname                                  = null
-  entrypoint                                  = ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/opt/bedrock-entry.sh"]
+  cpu_period = null
+  cpu_quota  = null
+  cpu_set    = null
+  cpu_shares = 0
+  cpus       = "2.0"
+  entrypoint = ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/opt/bedrock-entry.sh"]
   env = [
     "VERSION=1.26.13.1",
     "OPS=2535421692867887",
@@ -26,44 +22,19 @@ resource "docker_container" "minecraft-bedrock" {
     "ENABLE_BDS_V6BIND_FIX=false"
   ]
   gpus               = null
-  group_add          = []
   hostname           = "713a5e6bf826"
-  image              = "itzg/minecraft-bedrock-server"
-  init               = false
-  ipc_mode           = "private"
-  log_driver         = "json-file"
-  log_opts           = {}
-  logs               = null
-  max_retry_count    = 0
+  image              = docker_image.minecraft.image_id
   memory             = 3072
   memory_reservation = 2048
   memory_swap        = 3072
   must_run           = null
   name               = "tf-minecraft-bds"
   network_mode       = "minecraft-bedrock-server_default"
-  pid_mode           = null
-  platform           = "linux"
   privileged         = false
-  publish_all_ports  = false
-  read_only          = false
-  remove_volumes     = null
   restart            = "unless-stopped"
-  rm                 = false
-  runtime            = "runc"
-  security_opts      = []
   shm_size           = 64
-  start              = null
   stdin_open         = true
-  stop_signal        = null
-  stop_timeout       = 0
-  storage_opts       = {}
-  sysctls            = {}
-  tmpfs              = {}
   tty                = true
-  user               = null
-  userns_mode        = null
-  wait               = null
-  wait_timeout       = null
   working_dir        = "/data"
   healthcheck {
     interval       = "0s"
@@ -73,6 +44,7 @@ resource "docker_container" "minecraft-bedrock" {
     test           = ["CMD-SHELL", "/usr/local/bin/mc-monitor status-bedrock --host 127.0.0.1 --port $SERVER_PORT"]
     timeout        = "0s"
   }
+  # Portss for connecting to the server for gameplay
   ports {
     external = 19132
     internal = 19132

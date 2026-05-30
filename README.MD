@@ -8,6 +8,8 @@
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
 ## TODO
+- Setup Ansible Playbook to update homepage to stored files after it's provisioned(docker.yaml)
+- Setup modules to break resources files into resource type folders
 - Activate playbook to apply qbittorrent backup(kopia snapshot fails, needs work)
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
 - Revamp container image version management via Terraform
@@ -104,6 +106,8 @@ terraform plan -generate-config-out=<desired-resource-name>.tf
 - Provides container metrics for prometheus/grafana
 ## Dozzle
 - Provides strong look into container logs
+## Frigate
+- NVR solution using rstp feeds for smart cameras
 ## Gluetun (ProtonVPN via OpenVPN)
 - Established VPN network for other containers
 - Containers using this VPN network must have ports defined inside gluetun
