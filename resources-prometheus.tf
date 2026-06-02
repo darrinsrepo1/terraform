@@ -41,9 +41,6 @@ resource "docker_container" "prometheus-container" {
   must_run           = true
   restart            = "unless-stopped"
   depends_on         = [local_file.prometheus_yml]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 1024
@@ -53,7 +50,7 @@ resource "docker_container" "prometheus-container" {
   networks_advanced {
     name = docker_network.monitoring.name
   }
-
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
@@ -86,8 +83,9 @@ resource "docker_container" "prometheus-container" {
     container_path = "/etc/prometheus/prometheus.yml"
   }
 
+  # WebGUI Port
   ports {
-    internal = 9090 # WebGUI Port
+    internal = 9090
     external = 9090
   }
 }

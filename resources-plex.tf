@@ -32,14 +32,15 @@ resource "docker_container" "plex" {
     "HOME=/config"
   ]
   image              = docker_image.plex.image_id
-  memory             = 0
-  memory_reservation = 0
-  memory_swap        = 0
+  memory             = 10240
+  memory_reservation = 2048
+  memory_swap        = 12288
   must_run           = true
   name               = "tf-plex"
   #  network_mode       = "host"
-  restart  = "unless-stopped"
-  shm_size = 64
+  privileged = true
+  restart    = "unless-stopped"
+  shm_size   = 64
 
   labels {
     label = "homepage.group"
@@ -110,6 +111,7 @@ resource "docker_container" "plex" {
     timeout        = "2s"
   }
 
+  # Web GUI Access port
   ports {
     internal = 32400
     external = 32400
@@ -125,6 +127,7 @@ resource "docker_container" "plex" {
     external = 32469
     protocol = "tcp"
   }
+  # DLNA Port
   ports {
     internal = 1900
     external = 1900

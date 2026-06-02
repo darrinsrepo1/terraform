@@ -2,13 +2,10 @@
 # Define image for minecraft server so it can be controllerd with others via tfvars
 resource "docker_image" "minecraft" {
   name = var.minecraft-bds_image
-  }
+}
 
 # Define Minecraft server container resource to provision
 resource "docker_container" "minecraft-bedrock" {
-  cpu_period = null
-  cpu_quota  = null
-  cpu_set    = null
   cpu_shares = 0
   cpus       = "2.0"
   entrypoint = ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/opt/bedrock-entry.sh"]
