@@ -17,7 +17,7 @@ resource "local_file" "homepage_docker_yaml" {
   content         = file("/terraform/managed_files/homepage/docker.yaml")
   filename        = "/var/lib/docker/volumes/homepage-config/_data/docker.yaml"
   file_permission = "0644"
-  depends_on = [ docker_volume.homepage_config ]
+  depends_on      = [docker_volume.homepage_config]
 }
 
 # Sets ownership of the local file
@@ -44,17 +44,15 @@ resource "docker_container" "homepage-container" {
     "TZ=America/Los_Angeles",
     "HOMEPAGE_ALLOWED_HOSTS=${var.homepage_allowed_hosts}"
   ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
 
-  depends_on = [ null_resource.homepage_docker_yaml_ownership ]
+  depends_on = [null_resource.homepage_docker_yaml_ownership]
 
+  # Allows access to docker socket to retreive info from container labels dynamically
   mounts {
     type      = "bind"
     target    = "/var/run/docker.sock"
@@ -67,8 +65,9 @@ resource "docker_container" "homepage-container" {
     container_path = "/app/config"
   }
 
+  # WebGUI Port
   ports {
-    internal = 3000 # WebGUI Port
+    internal = 3000
     external = 3000
   }
 }

@@ -11,13 +11,10 @@ resource "docker_container" "frigate" {
   image      = docker_image.frigate.image_id
   restart    = "unless-stopped"
   privileged = true # Needed for hardware acceleration and TPU passthrough
-  cpu_period = null
-  cpu_quota  = null
-  cpu_set    = null
   cpu_shares = 0
-  cpus       = null
+  cpus       = "2.0"
   shm_size   = 256 # Update depending on your camera count and resolution
-
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Security"
@@ -39,6 +36,7 @@ resource "docker_container" "frigate" {
     value = "Organizes and accesses Camera System feeds"
   }
 
+  # WebGUI Access port
   ports {
     internal = 5000
     external = 5000

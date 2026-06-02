@@ -62,7 +62,7 @@ variable "kopia_user" {
 }
 
 variable "minecraft-bds_image" {
-  type = string
+  type        = string
   description = "Docker image for Minecraft Bedrock Server container"
 }
 
@@ -121,6 +121,11 @@ variable "qbittorrent_image" {
 variable "radarr_image" {
   type        = string
   description = "Docker image for radarr container"
+}
+
+variable "sftp_image" {
+  type        = string
+  description = "]Docker image for sftp server container"
 }
 
 variable "sonarr_image" {

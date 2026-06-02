@@ -21,9 +21,6 @@ resource "docker_container" "qbittorrent-container" {
   env                = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run           = true
   restart            = "unless-stopped"
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "3.0"
   memory             = 4096
@@ -35,6 +32,7 @@ resource "docker_container" "qbittorrent-container" {
     docker_container.gluetun-container,
     null_resource.create-torrents-folder
   ]
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Torrent Suite"

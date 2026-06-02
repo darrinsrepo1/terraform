@@ -11,16 +11,13 @@ resource "docker_container" "cadvisor" {
   must_run = true
   restart  = "unless-stopped"
   #depends_on = [  ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "1.0"
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
   privileged         = true
-
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
@@ -73,9 +70,10 @@ resource "docker_container" "cadvisor" {
     read_only = true
   }
 
+  # WebGUI port changed to 8081 due to port conflict with Homepage container
   ports {
     internal = 8080
-    external = 8081 #Changed to 8081 due to port conflict with Homepage container
+    external = 8081
   }
 
   devices {
