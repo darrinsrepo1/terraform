@@ -8,6 +8,11 @@
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
 ## TODO
+- Setup FTP container 
+- Setup Home assistant container 
+- Setup Nextcloud container 
+- Setup Alerting container
+- Setup alerts and custon checks for plex video file access as user
 - Setup Ansible Playbook to update homepage to stored files after it's provisioned(docker.yaml)
 - Setup modules to break resources files into resource type folders
 - Activate playbook to apply qbittorrent backup(kopia snapshot fails, needs work)
