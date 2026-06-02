@@ -19,11 +19,7 @@ resource "docker_container" "jellyfin" {
   image      = docker_image.jellyfin.image_id
   name       = "tf-jellyfin"
   restart    = "unless-stopped"
-  cpu_period = null
-  cpu_quota  = null
-  cpu_set    = null
   cpu_shares = 0
-  cpus       = null
   env = [
     "PUID=1000",
     "PGID=1000",
@@ -34,7 +30,7 @@ resource "docker_container" "jellyfin" {
   memory_swap        = 4096
   must_run           = true
   shm_size           = 64
-
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Media"
@@ -56,6 +52,7 @@ resource "docker_container" "jellyfin" {
     value = "Home media streaming service (Plex Backup)"
   }
 
+  # WebGUI access port
   ports {
     internal = 8096
     external = 8096
@@ -66,9 +63,10 @@ resource "docker_container" "jellyfin" {
     external = 7359
     protocol = "udp"
   }
+  # 1900 conflicts with Plex DLNA
   ports {
     internal = 1900
-    external = 1905 #1900 conflicts with Plex DLNA
+    external = 1905
     protocol = "udp"
   }
 

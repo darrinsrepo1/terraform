@@ -50,14 +50,12 @@ resource "docker_container" "kopia-container" {
     "--server-username=${var.kopia_user}",
     "--server-password=${var.kopia_password}"
   ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 2072
   memory_reservation = 512
   memory_swap        = 2072
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Infra Management"
@@ -109,8 +107,9 @@ resource "docker_container" "kopia-container" {
     container_path = "/tmp"
   }
 
+  # WebGUI Port
   ports {
-    internal = 51515 # WebGUI Port
+    internal = 51515
     external = 51515
   }
 }

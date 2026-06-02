@@ -6,8 +6,9 @@ output "local-hostname" {
 output "webgui-urls" {
   description = "WebGUI ports for terraform container resources"
   value       = <<-EOT
-    Dozzle:        http://${data.external.local_data.result.ip}:8082
     cAdvisor:      http://${data.external.local_data.result.ip}:8081
+    Dozzle:        http://${data.external.local_data.result.ip}:8082
+    Frigate:       http://${data.external.local_data.result.ip}:5000
     Grafana:       http://${data.external.local_data.result.ip}:3001
     Homepage:      http://${data.external.local_data.result.ip}:3000
     Jellyfin:      http://${data.external.local_data.result.ip}:8096

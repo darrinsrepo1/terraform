@@ -11,15 +11,12 @@ resource "docker_container" "grafana" {
   must_run = true
   restart  = "unless-stopped"
   #depends_on = [  ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
-
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
@@ -41,9 +38,10 @@ resource "docker_container" "grafana" {
     value = "Graphing and analyzing metrics visually, primarily used with Prometheus"
   }
 
+  #WebGUI port changed to 3001 due to port conflict with Homepage container
   ports {
     internal = 3000
-    external = 3001 #Changed to 3001 due to port conflict with Homepage container
+    external = 3001
   }
   networks_advanced {
     name = docker_network.monitoring.name

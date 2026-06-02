@@ -21,14 +21,12 @@ resource "docker_container" "node-exporter-container" {
     "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)"
   ]
   #depends_on = [  ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Monitoring / Logging"
@@ -67,8 +65,9 @@ resource "docker_container" "node-exporter-container" {
     read_only      = true
   }
 
+  # Metrics exposed port
   ports {
-    internal = 9100 # Metrics exposed port
+    internal = 9100
     external = 9100
   }
 }

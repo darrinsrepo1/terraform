@@ -19,9 +19,6 @@ resource "docker_container" "radarr-container" {
   env                = ["PUID=1000", "PGID=1000", "TZ=America/Los_Angeles"]
   must_run           = true
   restart            = "unless-stopped"
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 2072
@@ -29,6 +26,7 @@ resource "docker_container" "radarr-container" {
   memory_swap        = 2072
   # Dependancy for qbittorrent removed since downloads volume is now a simple location instead of docker volume
   #depends_on = [docker_container.qbittorrent-container]
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Torrent Suite"
@@ -65,8 +63,9 @@ resource "docker_container" "radarr-container" {
     read_only      = false
   }
 
+  # WebGUI Port
   ports {
-    internal = 7878 # WebGUI Port
+    internal = 7878
     external = 7878
   }
 }

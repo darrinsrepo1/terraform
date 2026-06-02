@@ -1,9 +1,9 @@
 # Terraform Repository for Darrins Homelab
 
-- Total HCL Code Lines = 1235    # cloc /terraform/*.tf
-- Total Comment Lines = 148
-- Total Resources = 51          # terraform state list | wc -l : HCP Free Tier Requires < 500
-- Total Containers Managed = 15
+- Total HCL Code Lines      = 1339    # cloc /terraform/*.tf
+- Total Documentation Lines = 315
+- Total Resources           = 60          # terraform state list | wc -l : HCP Free Tier Requires < 500
+- Total Containers Managed  = 17
 
 - Defines homelab as code and uses Ansible for managing items that are not ideal to be managed in Terraform
 
@@ -13,34 +13,38 @@
 - Activate playbook to apply qbittorrent backup(kopia snapshot fails, needs work)
 - Rewrite Plex backup script on dedicated server into Kopia (once migrated)
 - Revamp container image version management via Terraform
+- Configure CI/CD for automatically deploying code to Home Server via Prod branch changes
   
 # Git Workflow
 Prod Server Branch = main  
-Test Box Branch = develop  
+Test Box Branch = develop (gaming server for main dev soon)
   
 ##Workflow Example for New Features: 
-- Pull recent develop to Test Box  (git checkout develop && git pull origin develop)
+- Pull recent develop to laptop (git checkout develop && git pull origin develop)
 - Create and switch to feature branch on Test Box  (git checkout -b feature/feature-name)
 - Test feature until happy and then commit  (git add . && git commit -m "detailed feature commit") 
 - Push feature to Remote  (git push origin feature/feature-name)
-- Create PR to merge feature into develop  (Review in github, create PR for feature/feature-name ~> develop)
+- Create PR, ensure it's merging into develop as it defaults to main (Review in github, create PR for feature/feature-name ~> develop)
 - Review PR and then merge PR into develop  (From PR in github)
-- Pull develop to Test Box and ensure changes present  (git checkout develop && git pull origin develop)
+- Pull develop to Dev Box and validate changes  (git checkout develop && git pull origin develop)
 - Delete feature branch from local and remote  (git branch -d feature/feature-name && git push origin --delete feature/feature-name)
+- Create PR via github to merge changes in main. Perform final review of commits
   
 ##To Deploy Current Developent Branch to Main:
-- Ensure Test Box is using latest develop  (git checkout develop && git pull origin develop)
-- Verify develop branch works on Test Box one last time  (perform terraform workflow)
-- Create PR in github  (From github create PR for develop ~> main)
+- Ensure Dev Box is using latest develop code  (git checkout develop && git pull origin develop)
+- Verify develop branch works on Dev Box one last time  (perform terraform workflow)
+- Create PR via github  (in github PR notice pops up for develop ~> main)
 - Final review of PR changes
 - Merge develop into main  (click merge inside PR)
 - On Prod Server pull latest main  (git checkout main && git pull origin main)
 - Deploy new changes on Prod Server via terraform workflow (terraform init; terraform plan; terraform apply)
   
 ##To Create Urgent Hotfix for Production Issues:
+#These changes are normally performing on prod directly to resolve an outage or critical bug.
+#Create the hotfix branch from the primary server to capture changes and have a quick rollback
 - Switch to main branch and pull latest  (git checkout main && git pull origin main)
 - Create hotfix branch  (git checkout -b hotfix/issue-description)
-- Develop the fix and test in terraform workflow
+- Develop the fix and test in terraform workflow, always format!
 - Add and commit working changes  (git add . && git commit -m "Detailed hotfix info")
 - Push hotfix to origin  (git push origin hotfix/issue-description)
 - Review changes in git, create git PR   (from git create PR for hotfix/issue-description ~> main)
@@ -48,8 +52,8 @@ Test Box Branch = develop
 - **Research version tagging**
 - Merge into develop from PR
 - From Prod Server checkout main and pull changes  (git checkout main && git pull origin main)
-- Run terraform workflow to deploy changes
-- Delete hotfix branch locally and remote  (git branch -d hotfix/issue-description && git push --delete hotfix/issue-description)
+- Run terraform workflow to ensure nothing changes (Since change was already deployed live)
+- Delete hotfix branch locally and remotely  (git branch -d hotfix/issue-description && git push --delete hotfix/issue-description)
   
 
 ## Moving Resources

@@ -16,14 +16,12 @@ resource "docker_container" "dozzle-container" {
   must_run = true
   restart  = "unless-stopped"
   #depends_on = [  ]
-  cpu_period         = null
-  cpu_quota          = null
-  cpu_set            = null
   cpu_shares         = 0
   cpus               = "2.0"
   memory             = 1024
   memory_reservation = 512
   memory_swap        = 1024
+  # Labels for homepage autopopulation
   labels {
     label = "homepage.group"
     value = "Infra Management"
@@ -53,9 +51,10 @@ resource "docker_container" "dozzle-container" {
     read_only = true
   }
 
+  # dozzle port for WebUI, external port is 8082 due to conficts with other containers
   ports {
-    internal = 8080 # dozzle port for WebUI
-    external = 8082 #Bumped due to conficts with other containers
+    internal = 8080
+    external = 8082
     protocol = "tcp"
   }
 }
