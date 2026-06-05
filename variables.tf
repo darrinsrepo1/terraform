@@ -59,6 +59,7 @@ variable "kopia_password" {
 variable "kopia_user" {
   type        = string
   description = "User for kopia"
+  sensitive   = true
 }
 
 variable "minecraft-bds_image" {
@@ -85,6 +86,7 @@ variable "openvpn_password" {
 variable "openvpn_user" {
   type        = string
   description = "OpenVPN Proton VPN User name for gluetun"
+  sensitive   = true
 }
 
 variable "plex_claim" {

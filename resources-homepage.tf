@@ -6,10 +6,6 @@ resource "docker_image" "homepage" {
 # Created persistent homepage volumes
 resource "docker_volume" "homepage_config" {
   name = "homepage-config"
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 # Create docker.yaml prior to creating homepage container
@@ -33,7 +29,7 @@ resource "null_resource" "homepage_docker_yaml_ownership" {
 }
 
 # Creating a Docker Container for homepage
-resource "docker_container" "homepage-container" {
+resource "docker_container" "homepage_container" {
   image    = docker_image.homepage.image_id
   name     = "tf-homepage"
   must_run = true
