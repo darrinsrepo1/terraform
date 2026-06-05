@@ -1,0 +1,18 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Walkthroughs:
+    - Ocarina of Time:
+        - abbr: OZ
+          href: https://www.zeldadungeon.net/ocarina-of-time-walkthrough/
+
+- Learning:
+    - National Geographic Kids:
+        - abbr: NG
+          href: https://kids.nationalgeographic.com/
+
+- Entertainment:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
